@@ -16,6 +16,7 @@ const grid = document.getElementById('grid');
 const button = document.querySelector('header button');
 const selectLevel = document.querySelector('select');
 const form = document.querySelector('form');
+const scoreIndex = document.getElementById('score');
 
 
 
@@ -31,10 +32,12 @@ form.addEventListener('submit', function(e){
     //recupero il valore della selectLevel
     const level = selectLevel.value;
 
-    //per ogni livello gli assegno il numero di row e col
+    // recupero dati
     let rows;
     let cols;
-    
+    let score = 0;
+
+    //  ogni livello gli assegno il numero di row e col
     switch(level){
         case 'easy':
             rows = 10;
@@ -66,6 +69,10 @@ form.addEventListener('submit', function(e){
             cell.classList.toggle('clicked');
             // stampo in console il numero della cella cliccata
             console.log(`Hai cliccato la cella n'${cell.innerText}`);
+            // incremento il punteggio su score
+            
+            scoreIndex.innerHTML = `<strong>${++score}</strong>`;
+            console.log('score', score)
         })
         
         // 4.generazione output
