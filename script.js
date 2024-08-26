@@ -10,7 +10,7 @@ function createCell(content, level){
     return cell;
 };
 
-// funzione che genera un numero random da min a max
+// funzione che genera un numero random da min a max 
 
 function getRandomNumber(min = 1, max = 100, numberQuantity){
     // genero 16 numeri casuali diversi
