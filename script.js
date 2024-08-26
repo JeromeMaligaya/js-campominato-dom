@@ -9,7 +9,22 @@ function createCell(content, level){
 
     return cell;
 };
-console.log
+
+// funzione che genera un numero random da min a max
+
+function getRandomNumber(min = 1, max = 100, numberQuantity){
+    // genero 16 numeri casuali diversi
+    let result = [];
+    while (result.length < numberQuantity) {
+
+        randomNumber = Math.floor(Math.random() * (max - min)) + min;
+
+        if (!result.includes(randomNumber)) result.push(randomNumber);
+    }
+
+    // dalla funzione mi uscirà l'array generato
+    return result;
+}
 
 // 1.recupero l'elemento dal Dom (grid, button)
 const grid = document.getElementById('grid');
@@ -36,6 +51,7 @@ form.addEventListener('submit', function(e){
     let rows;
     let cols;
     let score = 0;
+    const totBombs = 16;
 
     //  ogni livello gli assegno il numero di row e col
     switch(level){
@@ -55,6 +71,10 @@ form.addEventListener('submit', function(e){
 
     // calcolo il numero di celle
     let totCells = rows * cols;
+
+    // invoco la fun getRandomNumber per avere 16 numeri diversi (bombe)
+    const bombs = getRandomNumber(1, totCells, totBombs)
+    console.log('bombs', bombs)
 
     // ciclo for
     for (let i = 1; i <= totCells; i++){
@@ -78,7 +98,6 @@ form.addEventListener('submit', function(e){
         // 4.generazione output
         // stampo in pagina
         grid.appendChild(cell);
-        console.log(cell);
     }
     
     
