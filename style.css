@@ -1,0 +1,91 @@
+/*css-reset*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*generics*/
+body{
+    font-family: sans-serif;
+}
+
+header, footer{
+    height: 75px;
+}
+
+main{
+    background-color: #64FDD3;
+    padding: 50px 0;
+}
+
+img{
+    width: 100%;
+    display: block;
+}
+
+/*layout*/
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/*color*/
+
+/*bg*/
+
+/*utilities*/
+
+/* header */
+
+header button, header select{
+    height: 35px;
+}
+
+header button{
+    width: 150px;
+}
+
+header img{
+    width: 75px;
+}
+
+/* main */
+
+#grid{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#grid{
+    width: 650px;
+    height: 650px;
+    margin: 0 auto;
+}
+
+#grid .cell{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#grid .cell.easy{
+    flex-basis: 10%;
+    height: 10%;
+}
+#grid .cell.medium{
+    flex-basis: calc(100% / 9);
+    height: calc(100% / 9);
+}
+#grid .cell.hard{
+    flex-basis:calc(100% / 7);
+    height:calc(100% / 7);
+}
+ 
+
+#grid .cell.clicked{
+    background-color: blue;
+    color: white;
+}
