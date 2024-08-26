@@ -41,9 +41,10 @@ const result = document.getElementById('result');
 form.addEventListener('submit', function(e){  
     e.preventDefault();
 
-    // svuoto la griglia e cambio il testo al bottone
+    // svuoto la griglia, cambio il testo al bottone e svuoto result
     grid.innerHTML = '';
     button.innerText = 'Ricomincia';
+    result.innerText = '';
 
     //recupero il valore della selectLevel
     const level = selectLevel.value;
@@ -102,14 +103,26 @@ form.addEventListener('submit', function(e){
                 // stampo in console il numero della cella cliccata
                 message = `
                 <h2 class="text-danger text-center">Hai PERSO!!! Hai calpestato una bomba nella cella n'${cell.innerText}, 
-                <br>il tuo score: ${score}.
+                <br>il tuo score è: ${score}.
                 <br>
                 <br>Premi il tasto 'Ricomincia' per rigiocare.</h2>
                 `;
                 // svuoto il contenuto della cella
                 cell.innerText = '';
                 // aggiungo la classe bomb alla cella cliccata
-                cell.classList.add('bomb');             
+                cell.classList.add('bomb'); 
+                
+                // coloro e blocco tutte le celle con le classi clicked o bomb
+                const cells = document.querySelectorAll('.cell');
+                console.log(cells)
+                for(let i = 0; i < cells.length; i++){
+                    if (bombs.includes(i)){
+                        cells[i].innerText = '';
+                        cells[i].classList.add('bomb')
+                    } else {
+                        cells[i].classList.add('clicked')
+                    }
+                }            
                              
                 // stampo in pagina message
                 result.innerHTML = message;
@@ -126,7 +139,7 @@ form.addEventListener('submit', function(e){
             }
 
             if (score === maxScore){
-                message = `<h2 class="text-success text-center">HAI VINTOOOO!! Hai evitato tutte le bombe, il tuo score: ${score}.</h2>`;
+                message = `<h2 class="text-success text-center">HAI VINTOOOO!! Hai evitato tutte le bombe, il tuo score è: ${score}.</h2>`;
                 // stampo in pagina message
                 result.innerHTML = message;
             }
