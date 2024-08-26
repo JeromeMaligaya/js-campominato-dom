@@ -72,7 +72,7 @@ form.addEventListener('submit', function(e){
     // calcolo il numero di celle
     let totCells = rows * cols;
 
-    // invoco la fun getRandomNumber per avere 16 numeri diversi (bombe)
+    // invoco la funz getRandomNumber per avere in un array 16 numeri diversi (bombe)
     const bombs = getRandomNumber(1, totCells, totBombs)
     console.log('bombs', bombs)
 
@@ -82,17 +82,31 @@ form.addEventListener('submit', function(e){
         // invoco la funz createCell
         // numerare le celle [i]
         const cell = createCell(i, level);
+        const cells = document.querySelectorAll('.cell');
         
         //evento alla cella x cambio colore e console log n' cella
         cell.addEventListener('click', function(){
-            // aggiungo/rimuovo la classe clicked
-            cell.classList.toggle('clicked');
-            // stampo in console il numero della cella cliccata
-            console.log(`Hai cliccato la cella n'${cell.innerText}`);
-            // incremento il punteggio su score
-            
-            scoreIndex.innerHTML = `<strong>${++score}</strong>`;
-            console.log('score', score)
+            // raccolgo la cella cliccata
+            const cellClicked = parseInt(this.innerText);
+
+            let message='';
+            if(bombs.includes(cellClicked)){
+                // stampo in console il numero della cella cliccata
+                message = `Hai PERSO!!! Hai calpestato uma bomba (cella n'${cell.innerText})`;
+                cell.innerText = '';
+                cell.classList.add('bomb');  
+            } else{
+                // aggiungo la classe clicked
+                cell.classList.add('clicked');
+
+                // stampo in console il numero della cella cliccata
+                message = `Hai cliccato la cella n'${cell.innerText}`;
+                
+                // incremento il punteggio su score
+                scoreIndex.innerHTML = `<strong>${++score}</strong>`;
+            }
+
+            console.log('message', message)
         })
         
         // 4.generazione output

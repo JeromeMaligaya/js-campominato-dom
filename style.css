@@ -89,3 +89,10 @@ header img{
     background-color: blue;
     color: white;
 }
+
+#grid .cell.bomb{
+    background-image: url(img/bomb.png);
+    background-position: center;
+    background-size: cover;
+    color: white;
+}
