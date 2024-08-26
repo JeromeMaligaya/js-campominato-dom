@@ -88,6 +88,7 @@ header img{
 #grid .cell.clicked{
     background-color: blue;
     color: white;
+    cursor: not-allowed;
 }
 
 #grid .cell.bomb{
@@ -95,4 +96,5 @@ header img{
     background-position: center;
     background-size: cover;
     color: white;
+    cursor: not-allowed;
 }

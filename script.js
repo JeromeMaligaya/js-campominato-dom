@@ -32,6 +32,7 @@ const button = document.querySelector('header button');
 const selectLevel = document.querySelector('select');
 const form = document.querySelector('form');
 const scoreIndex = document.getElementById('score');
+const result = document.getElementById('result');
 
 
 
@@ -82,31 +83,53 @@ form.addEventListener('submit', function(e){
         // invoco la funz createCell
         // numerare le celle [i]
         const cell = createCell(i, level);
-        const cells = document.querySelectorAll('.cell');
         
-        //evento alla cella x cambio colore e console log n' cella
+        
+        //evento alla cella
         cell.addEventListener('click', function(){
+           
+            // se la cella cliccata ha la classe clicked esco
+            if (cell.classList.contains('clicked')) return;
+
             // raccolgo la cella cliccata
             const cellClicked = parseInt(this.innerText);
-
-            let message='';
-            if(bombs.includes(cellClicked)){
+            
+            // raccolta dati
+            let message = '';
+            const maxScore = totCells - totBombs;
+            
+            if (bombs.includes(cellClicked)){
                 // stampo in console il numero della cella cliccata
-                message = `Hai PERSO!!! Hai calpestato uma bomba (cella n'${cell.innerText})`;
+                message = `
+                <h2 class="text-danger text-center">Hai PERSO!!! Hai calpestato una bomba nella cella n'${cell.innerText}, 
+                <br>il tuo score: ${score}.
+                <br>
+                <br>Premi il tasto 'Ricomincia' per rigiocare.</h2>
+                `;
+                // svuoto il contenuto della cella
                 cell.innerText = '';
-                cell.classList.add('bomb');  
-            } else{
+                // aggiungo la classe bomb alla cella cliccata
+                cell.classList.add('bomb');             
+                             
+                // stampo in pagina message
+                result.innerHTML = message;
+            } else {
                 // aggiungo la classe clicked
                 cell.classList.add('clicked');
 
                 // stampo in console il numero della cella cliccata
-                message = `Hai cliccato la cella n'${cell.innerText}`;
+                console.log(`Hai cliccato la cella n'${cell.innerText}`);
                 
                 // incremento il punteggio su score
                 scoreIndex.innerHTML = `<strong>${++score}</strong>`;
+                console.log('your score: ', score)
             }
 
-            console.log('message', message)
+            if (score === maxScore){
+                message = `<h2 class="text-success text-center">HAI VINTOOOO!! Hai evitato tutte le bombe, il tuo score: ${score}.</h2>`;
+                // stampo in pagina message
+                result.innerHTML = message;
+            }
         })
         
         // 4.generazione output
